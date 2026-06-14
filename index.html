@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ivanti Neurons | DnA IT : תשתית מחשוב בניהול עצמי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================ */
+  /* DnA IT Service Page : Ivanti Neurons          */
+  /* Locked Design System                          */
+  /* ============================================ */
+
+  :root {
+    --bg: #ffffff;
+    --bg-elev: #f7f7f5;
+    --bg-card: #ffffff;
+    --bg-dark: #0a0a0a;
+    --line: #e5e5e2;
+    --line-soft: #ededea;
+    --text: #0a0a0a;
+    --text-dim: #5a5a5a;
+    --text-mute: #888888;
+    --accent: #f4d03f;
+    --accent-strong: #e6c12d;
+    --accent-soft: #fef6c8;
+    --accent-glow: rgba(244, 208, 63, 0.35);
+    --radius: 4px;
+    --max: 1280px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans Hebrew', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 2;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--text);
+  }
+
+  /* ============ EYEBROW ============ */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    padding-bottom: 8px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--text);
+  }
+  .section-head .eyebrow::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+  }
+  .section-head.in .eyebrow::after { width: 100%; }
+
+  /* ============ SECTION BASE ============ */
+  section { padding: 140px 0; position: relative; }
+  .section-head { margin-bottom: 72px; max-width: 760px; }
+  .section-head .eyebrow { margin-bottom: 24px; }
+  .section-head h2 {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: -0.025em;
+  }
+  .section-head p { font-size: 18px; color: var(--text-dim); line-height: 1.7; }
+
+  /* ============ SCROLL REVEAL ============ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    * { animation-duration: 0.01ms !important; }
+  }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    padding: 16px 28px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--text); color: var(--bg); }
+  .btn-primary:hover { background: var(--accent); color: var(--text); transform: translateY(-1px); }
+  .btn-secondary { border-color: var(--text); color: var(--text); background: transparent; }
+  .btn-secondary:hover { background: var(--text); color: var(--bg); }
+  .btn::after { content: "←"; transition: transform 0.2s; }
+  .btn:hover::after { transform: translateX(-4px); }
+
+  /* ============================================ */
+  /* 01 HERO : Split 60/40 + Neuron Network        */
+  /* ============================================ */
+  .hero {
+    min-height: 92vh;
+    padding: 120px 0 100px;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 40%; left: 22%;
+    transform: translate(-50%, -50%);
+    width: 760px; height: 520px;
+    background: radial-gradient(ellipse, var(--accent-glow), transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .hero-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero .eyebrow { margin-bottom: 28px; }
+  .hero h1 {
+    font-size: clamp(44px, 5.6vw, 78px);
+    font-weight: 800;
+    margin-bottom: 28px;
+    letter-spacing: -0.035em;
+    line-height: 1.06;
+  }
+  .hero h1 .accent {
+    background: var(--accent);
+    padding: 0 16px;
+    display: inline-block;
+    transform: skew(-3deg);
+  }
+  .hero-sub {
+    font-size: 20px;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    max-width: 640px;
+    line-height: 1.65;
+  }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 44px; }
+
+  .hero-live { display: flex; gap: 12px; flex-wrap: wrap; }
+  .live-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    border-radius: var(--radius);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    transition: all 0.3s ease;
+  }
+  .live-chip:hover { border-color: var(--text); background: var(--accent-soft); transform: translateY(-2px); }
+  .live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent-strong);
+    animation: livePulse 2.2s ease-in-out infinite;
+  }
+  .live-chip:nth-child(2) .live-dot { animation-delay: 0.7s; }
+  .live-chip:nth-child(3) .live-dot { animation-delay: 1.4s; }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(244, 208, 63, 0.5); }
+    50% { opacity: 0.45; box-shadow: 0 0 0 5px rgba(244, 208, 63, 0); }
+  }
+
+  .hero-visual {
+    position: relative;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(244, 208, 63, 0.08), rgba(244, 208, 63, 0.02) 60%, transparent);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .hero-visual::before {
+    content: "";
+    position: absolute;
+    top: -1px; right: -1px;
+    width: 60px; height: 6px;
+    background: var(--accent);
+  }
+  .hero-visual::after {
+    content: "";
+    position: absolute;
+    bottom: -1px; left: -1px;
+    width: 60px; height: 6px;
+    background: var(--text);
+  }
+  .hero-visual svg { width: 100%; height: auto; display: block; }
+  .neuron-caption {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 968px) {
+    .hero { min-height: auto; padding: 96px 0 80px; }
+    .hero-split { grid-template-columns: 1fr; gap: 48px; }
+    .hero-visual { max-width: 440px; margin: 0 auto; width: 100%; }
+  }
+
+  /* ============ TRUST BAR ============ */
+  .trust { padding: 30px 0; background: var(--bg-dark); color: var(--bg); }
+  .trust-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 40px; flex-wrap: wrap;
+  }
+  .trust-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+  }
+  .trust-items { display: flex; gap: 44px; align-items: center; flex-wrap: wrap; }
+  .trust-badge {
+    display: flex; align-items: center; gap: 10px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px; font-weight: 500;
+  }
+  .trust-badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+  /* ============================================ */
+  /* 02 STORY TOGGLE                              */
+  /* ============================================ */
+  .story-toggle-wrap { display: flex; justify-content: center; margin-bottom: 56px; }
+  .story-toggle {
+    display: inline-flex;
+    border: 1px solid var(--text);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .story-toggle button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    font-family: 'Noto Sans Hebrew', system-ui, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-dim);
+    padding: 16px 36px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    min-width: 160px;
+  }
+  .story-toggle button:first-child { border-left: 1px solid var(--text); }
+  .story-toggle button.active { background: var(--text); color: var(--accent); }
+  .story-toggle button:not(.active):hover { background: var(--accent-soft); color: var(--text); }
+
+  .scenario { display: none; }
+  .scenario.active { display: block; animation: scenarioIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes scenarioIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .scenario-story {
+    border-right: 3px solid var(--line);
+    padding-right: 28px;
+  }
+  .scenario.with .scenario-story { border-right-color: var(--accent); }
+  .scenario-story .scenario-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    display: block;
+    margin-bottom: 16px;
+  }
+  .scenario.with .scenario-story .scenario-tag { color: var(--accent-strong); }
+  .scenario-story p { font-size: 19px; line-height: 1.75; color: var(--text); }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    position: relative;
+  }
+  .chain-step + .chain-step::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 13px;
+    width: 2px;
+    height: 16px;
+    background: var(--line);
+  }
+  .chain-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    background: var(--bg);
+    color: var(--text-mute);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .chain-step span { font-size: 15px; color: var(--text-dim); }
+  .scenario.with .chain-num { border-color: var(--accent); background: var(--accent); color: var(--text); }
+  .scenario.with .chain-step + .chain-step::before { background: var(--accent); }
+  .scenario.with .chain-step span { color: var(--text); font-weight: 600; }
+  .scenario-note {
+    margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-mute);
+    letter-spacing: 0.04em;
+  }
+  .scenario.with .scenario-note { color: var(--accent-strong); }
+
+  @media (max-width: 968px) {
+    .scenario-grid { grid-template-columns: 1fr; gap: 36px; }
+    .scenario-story { border-right-width: 3px; padding-right: 20px; }
+    .story-toggle { width: 100%; }
+    .story-toggle button { flex: 1; min-width: 0; padding: 16px 12px; }
+  }
+
+  /* ============================================ */
+  /* 03 SELF-HEALING LOOP                         */
+  /* ============================================ */
+  .loop-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--text-mute);
+    text-align: center;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+  .loop-label::before,
+  .loop-label::after {
+    content: "";
+    flex: 0 0 60px;
+    height: 1px;
+    background: var(--line);
+  }
+  .loop-stage {
+    display: grid;
+    grid-template-columns: 1fr 90px 1fr 90px 1fr;
+    align-items: stretch;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .flow-node {
+    background: var(--bg);
+    border: 1px solid var(--text);
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .flow-node:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.1);
+  }
+  .flow-node.dark {
+    background: var(--bg-dark);
+    color: var(--bg);
+    border-color: var(--bg-dark);
+  }
+  .fn-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: var(--bg-elev);
+    border-bottom: 2px solid var(--accent);
+  }
+  .flow-node.dark .fn-head {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom-color: var(--accent);
+  }
+  .fn-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .fn-dots span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+  .fn-dots span:first-child { background: var(--accent); }
+  .flow-node.dark .fn-dots span { background: rgba(255, 255, 255, 0.18); }
+  .flow-node.dark .fn-dots span:first-child { background: var(--accent); }
+  .fn-step {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--text);
+  }
+  .flow-node.dark .fn-step { color: var(--accent); }
+  .fn-viz {
+    padding: 26px 22px;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 96px;
+  }
+  .flow-node.dark .fn-viz { background: rgba(255, 255, 255, 0.02); }
+  .fn-viz svg {
+    width: 100%;
+    height: auto;
+    max-height: 70px;
+    display: block;
+  }
+  .fn-body {
+    padding: 22px 24px 26px;
+    flex: 1;
+  }
+  .fn-body h4 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 8px;
+    color: inherit;
+  }
+  .fn-body p {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .flow-node.dark .fn-body p { color: rgba(255, 255, 255, 0.7); }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flow-arrow svg { width: 100%; height: auto; }
+
+  .loop-closer {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 110px;
+    position: relative;
+  }
+  .loop-closer svg { width: 100%; height: 100%; display: block; }
+
+  .loop-continue {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--accent);
+    border: 1px solid var(--text);
+    border-radius: var(--radius);
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 8px 28px rgba(244, 208, 63, 0.4);
+  }
+  .loop-continue .lc-marker {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--text);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .loop-continue .lc-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .loop-continue p {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .remote-note {
+    margin: 56px auto 0;
+    max-width: 760px;
+    border: 1px solid var(--line);
+    border-right: 4px solid var(--accent);
+    background: var(--bg-elev);
+    padding: 24px 28px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border-radius: var(--radius);
+  }
+  .remote-note .rn-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--text);
+    background: var(--accent);
+    padding: 4px 10px;
+    white-space: nowrap;
+    border-radius: 2px;
+    margin-top: 3px;
+  }
+  .remote-note p { font-size: 15px; color: var(--text-dim); }
+
+  .loop-section {
+    position: relative;
+  }
+  .loop-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .loop-section .container { position: relative; z-index: 1; }
+
+  @media (max-width: 880px) {
+    .loop-stage {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      max-width: 460px;
+    }
+    .flow-arrow { transform: rotate(-90deg); height: 56px; }
+    .loop-closer { display: none; }
+    .loop-continue { margin-top: 14px; }
+    .remote-note { flex-direction: column; gap: 12px; }
+  }
+
+  /* ============================================ */
+  /* MANIFESTO                                    */
+  /* ============================================ */
+  .manifesto {
+    background: var(--accent);
+    padding: 130px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .manifesto::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 70px,
+      rgba(0, 0, 0, 0.025) 70px,
+      rgba(0, 0, 0, 0.025) 71px
+    );
+    pointer-events: none;
+  }
+  .manifesto-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 72px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .manifesto-inner { max-width: 720px; }
+  .manifesto .eyebrow {
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+  .manifesto .eyebrow::before { background: var(--text); }
+  .manifesto h2 {
+    font-size: clamp(38px, 5vw, 64px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  .manifesto p {
+    font-size: 19px;
+    color: rgba(10, 10, 10, 0.75);
+    max-width: 580px;
+    line-height: 1.6;
+  }
+  .manifesto-glyph {
+    width: 220px;
+    height: 220px;
+    background: var(--text);
+    border-radius: var(--radius);
+    padding: 30px;
+    flex-shrink: 0;
+    position: relative;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+  }
+  .manifesto-glyph svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .manifesto-glyph::before {
+    content: "// PRINCIPLE";
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: rgba(244, 208, 63, 0.7);
+  }
+  @media (max-width: 968px) {
+    .manifesto-grid { grid-template-columns: 1fr; gap: 56px; justify-items: start; }
+    .manifesto-glyph { width: 180px; height: 180px; }
+  }
+  .tabs-bar {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 56px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-bar::-webkit-scrollbar { display: none; }
+  .tab {
+    appearance: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    padding: 16px 22px 18px;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.25s ease;
+  }
+  .tab::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--text); }
+  .tab.active::after { transform: scaleX(1); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: grid; animation: scenarioIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .tab-panel {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .tab-panel h3 { font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 18px; letter-spacing: -0.02em; }
+  .tab-panel h3 .en {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.55em;
+    font-weight: 600;
+    color: var(--text-mute);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-top: 8px;
+  }
+  .tab-panel > div > p { font-size: 17px; color: var(--text-dim); margin-bottom: 28px; }
+  .tab-points { display: flex; flex-direction: column; gap: 12px; }
+  .tab-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .tab-point::before {
+    content: "✓";
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--accent-strong);
+    margin-top: 1px;
+  }
+  .tab-motif {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+  .tab-motif::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 32px; height: 4px;
+    background: var(--accent);
+  }
+  .tab-motif svg { width: 100%; max-width: 320px; height: auto; }
+
+  @media (max-width: 968px) {
+    .tab-panel { grid-template-columns: 1fr; gap: 36px; }
+    .tab-motif { min-height: 240px; }
+  }
+
+  /* ============================================ */
+  /* 05 DEPTH LAYER                               */
+  /* ============================================ */
+  .depth { background: var(--bg-elev); }
+  .depth-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .depth-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 44px 36px;
+    position: relative;
+    transition: all 0.3s ease;
+    border-radius: var(--radius);
+  }
+  .depth-card::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 32px; height: 4px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .depth-card:hover {
+    border-color: var(--text);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  }
+  .depth-card:hover::before { width: 100%; }
+  .depth-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    display: block;
+    margin-bottom: 20px;
+  }
+  .depth-card h3 { font-size: 22px; margin-bottom: 14px; }
+  .depth-card p { font-size: 15px; color: var(--text-dim); }
+  .depth-card.callout {
+    background: rgba(244, 208, 63, 0.08);
+    border-color: rgba(230, 193, 45, 0.45);
+  }
+  .depth-card.callout .depth-tag { color: var(--text); }
+  .depth-card.callout:hover { background: var(--accent-soft); border-color: var(--text); }
+  .depth-list { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; }
+  .depth-list span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .depth-list span::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--accent-strong);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  @media (max-width: 968px) { .depth-grid { grid-template-columns: 1fr; } }
+
+  /* ============================================ */
+  /* 06 INTEGRATIONS                              */
+  /* ============================================ */
+  .hub-svg-wrap { max-width: 860px; margin: 0 auto; }
+  .hub-svg-wrap svg { width: 100%; height: auto; display: block; }
+  .hub-mobile { display: none; }
+  .hub-caption {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 15px;
+    color: var(--text-dim);
+  }
+  @media (max-width: 700px) {
+    .hub-svg-wrap { display: none; }
+    .hub-mobile { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .hub-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 18px;
+      border: 1px solid var(--text);
+      border-radius: var(--radius);
+      background: var(--bg);
+    }
+    .hub-chip.center { background: var(--accent); border-color: var(--text); width: 100%; text-align: center; }
+  }
+
+  /* ============================================ */
+  /* 07 ONE PLATFORM                              */
+  /* ============================================ */
+  .one {
+    background: var(--bg-dark);
+    color: var(--bg);
+    overflow: hidden;
+    position: relative;
+  }
+  .one::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    pointer-events: none;
+  }
+  .one .eyebrow { color: var(--accent); }
+  .one .eyebrow::before { background: var(--accent); }
+  .one-top {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-bottom: 88px;
+  }
+  .one-digit-wrap { position: relative; }
+  .one-digit-wrap::before {
+    content: "";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px; height: 480px;
+    background: radial-gradient(ellipse, var(--accent-glow), transparent 68%);
+    filter: blur(70px);
+    pointer-events: none;
+  }
+  .one-digit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(220px, 26vw, 320px);
+    font-weight: 800;
+    line-height: 0.8;
+    letter-spacing: -0.06em;
+    color: var(--accent);
+    position: relative;
+    display: block;
+  }
+  .one-text h2 {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 800;
+    color: var(--bg);
+    letter-spacing: -0.025em;
+    margin-bottom: 22px;
+  }
+  .one-text > p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 560px;
+  }
+  .one-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .one-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 32px;
+    transition: all 0.3s ease;
+    border-radius: var(--radius);
+  }
+  .one-card:hover {
+    background: rgba(244, 208, 63, 0.05);
+    border-color: rgba(244, 208, 63, 0.3);
+    transform: translateY(-4px);
+  }
+  .one-card .oc-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 18px;
+    font-weight: 600;
+    display: block;
+  }
+  .one-card h3 { color: var(--bg); font-size: 21px; margin-bottom: 12px; }
+  .one-card p { color: rgba(255, 255, 255, 0.7); font-size: 14px; }
+
+  @media (max-width: 968px) {
+    .one-top { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+    .one-digit { font-size: clamp(180px, 42vw, 260px); }
+    .one-text > p { margin: 0 auto; }
+    .one .section-head-mini { text-align: center; }
+    .one-cards { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================ */
+  /* 08 DNA IT VALUE                              */
+  /* ============================================ */
+  .dna-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .dna-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 44px 40px;
+    position: relative;
+    transition: all 0.3s ease;
+    border-radius: var(--radius);
+  }
+  .dna-card::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 32px; height: 4px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+  .dna-card:hover {
+    border-color: var(--text);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  }
+  .dna-card:hover::before { width: 100%; }
+  .dna-card.callout {
+    background: rgba(244, 208, 63, 0.1);
+    border-color: rgba(230, 193, 45, 0.5);
+  }
+  .dna-card.callout:hover { background: var(--accent-soft); border-color: var(--text); }
+  .dna-card .dc-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    display: block;
+    margin-bottom: 18px;
+  }
+  .dna-card h3 { font-size: 22px; margin-bottom: 12px; }
+  .dna-card p { font-size: 15px; color: var(--text-dim); }
+  @media (max-width: 768px) { .dna-grid { grid-template-columns: 1fr; } }
+
+  /* ============================================ */
+  /* 09 PROCESS STEPPER                           */
+  /* ============================================ */
+  .dna-process-stepper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: relative;
+    padding-top: 8px;
+  }
+  .dna-process-stepper::before {
+    content: "";
+    position: absolute;
+    top: 44px;
+    right: 36px;
+    left: 36px;
+    height: 2px;
+    background: var(--line);
+    z-index: 1;
+  }
+  .dna-process-stepper::after {
+    content: "";
+    position: absolute;
+    top: 44px;
+    right: 36px;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    z-index: 1;
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .dna-process-stepper:hover::after { width: calc(100% - 72px); }
+  .dna-step { text-align: center; position: relative; padding: 0 12px; }
+  .dna-step-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .dna-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .dna-step:hover .dna-step-circle { background: var(--accent); transform: scale(1.08); }
+  .dna-step-content h4 { font-size: 16px; font-weight: 700; margin: 0 0 8px 0; }
+  .dna-step-content p { color: var(--text-dim); font-size: 13px; line-height: 1.5; }
+
+  @media (max-width: 968px) {
+    .dna-process-stepper { grid-template-columns: repeat(3, 1fr); gap: 32px 16px; }
+    .dna-process-stepper::before, .dna-process-stepper::after { display: none; }
+    .dna-step { text-align: right; display: flex; gap: 16px; align-items: flex-start; padding: 0; }
+    .dna-step-circle { margin: 0; flex-shrink: 0; width: 48px; height: 48px; }
+    .dna-step-num { font-size: 16px; }
+    .dna-step-content { padding-top: 8px; }
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-split">
+        <div class="hero-text">
+          <div class="eyebrow">Hyper Automation Engine</div>
+          <h1>Ivanti Neurons <span class="accent">אוטומציה מלאה</span> לתשתיות ה IT הארגוניות</h1>
+          <p class="hero-sub">
+            מעבר מניהול תקלות ריאקטיבי לארכיטקטורת מחשוב בשירות עצמי. הפלטפורמה מזהה, מתקנת ומאבטחת נקודות קצה באופן פרואקטיבי עוד לפני שהמשתמש חווה פגיעה ברציפות העבודה.
+          </p>
+          <div class="hero-ctas">
+            <a href="#demo" class="btn btn-primary">תיאום פגישת אפיון הנדסי</a>
+            <a href="#loop" class="btn btn-secondary">ארכיטקטורת המערכת</a>
+          </div>
+          <div class="hero-live">
+            <div class="live-chip"><span class="live-dot"></span>Self Healing Operational</div>
+            <div class="live-chip"><span class="live-dot"></span>Real Time Asset Discovery</div>
+            <div class="live-chip"><span class="live-dot"></span>Predictive Patch Management</div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="160" r="6" fill="#0a0a0a"/>
+            <circle cx="100" cy="100" r="4" fill="#5a5a5a"/>
+            <circle cx="300" cy="100" r="4" fill="#5a5a5a"/>
+            <circle cx="100" cy="220" r="4" fill="#5a5a5a"/>
+            <circle cx="300" cy="220" r="4" fill="#5a5a5a"/>
+            <line x1="200" y1="160" x2="100" y2="100" stroke="#e5e5e2" stroke-width="1.5"/>
+            <line x1="200" y1="160" x2="300" y2="100" stroke="#e5e5e2" stroke-width="1.5"/>
+            <line x1="200" y1="160" x2="100" y2="220" stroke="#e5e5e2" stroke-width="1.5"/>
+            <line x1="200" y1="160" x2="300" y2="220" stroke="#e5e5e2" stroke-width="1.5"/>
+            <path d="M100 100 L300 100 L300 220 L100 220 Z" stroke="#f4d03f" stroke-width="1" stroke-dasharray="4 4"/>
+          </svg>
+          <div class="neuron-caption">Continuous Telemetry Operational Network</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust">
+    <div class="container">
+      <div class="trust-inner">
+        <div class="trust-label">Enterprise Deployment Scale</div>
+        <div class="trust-items">
+          <div class="trust-badge"><span class="dot"></span>מיפוי נכסים בזמן אמת</div>
+          <div class="trust-badge"><span class="dot"></span>תיקון שגיאות אוטומטי בקצה</div>
+          <div class="trust-badge"><span class="dot"></span>ניהול פגיעויות מבוסס סיכונים</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Operational Framework</div>
+        <h2>ההבדל המעשי ברמת הזמינות של תשתית המחשוב</h2>
+        <p>השוואה ארכיטקטונית בין ניהול קריאות מסורתי לבין מנגנון תיקון עצמי מבוסס סוכנים חכמים.</p>
+      </div>
+
+      <div class="story-toggle-wrap">
+        <div class="story-toggle">
+          <button type="button" class="active" data-scenario="legacy">מודל תפעול מסורתי</button>
+          <button type="button" data-scenario="neurons">ארכיטקטורת Ivanti Neurons</button>
+        </div>
+      </div>
+
+      <div class="scenario legacy active">
+        <div class="scenario-grid">
+          <div class="scenario-story">
+            <span class="scenario-tag">Incident Management Lifecycle</span>
+            <p>שגיאת קונפיגורציה או קריסת תוכנה משביתה את תחנת העבודה של המשתמש. האירוע מחייב פתיחת כרטיס תמיכה ידני, עובר לתור המשימות של צוות ה IT וממתין לטיפול בהתאם לעומס המערכת. התוצאה היא אובדן שעות עבודה יקרות לחברה.</p>
+          </div>
+          <div class="chain">
+            <div class="chain-step"><div class="chain-num">01</div><span>התרחשות תקלה מקומית בנקודת הקצה</span></div>
+            <div class="chain-step"><div class="chain-num">02</div><span>זיהוי עצמאי על ידי המשתמש ודיווח ידני למוקד</span></div>
+            <div class="chain-step"><div class="chain-num">03</div><span>המתנה בצוואר הבקבוק של צוות ה IT</span></div>
+            <div class="chain-step"><div class="chain-num">04</div><span>התחברות מרחוק ותיקון ידני של התקלה</span></div>
+          </div>
+        </div>
+        <div class="scenario-note">מדד זמן תיקון ממוצע: מספר שעות תלוי זמינות כוח אדם</div>
+      </div>
+
+      <div class="scenario neurons with">
+        <div class="scenario-grid">
+          <div class="scenario-story">
+            <span class="scenario-tag">Automated Remediation Loop</span>
+            <p>הסוכן המקומי מזהה את חריגת הקונפיגורציה בזמן אמת, עוד לפני שהמשתמש מודע לכשל. המערכת מפעילה באופן מיידי תסריט תיקון מוגדר מראש ברמת נקודת הקצה. התקלה נפתרת ברקע ללא צורך בהתערבות אנושית וללא השבתת פעילות.</p>
+          </div>
+          <div class="chain">
+            <div class="chain-step"><div class="chain-num">01</div><span>ניטור רציף וזיהוי אנומליה בקצה</span></div>
+            <div class="chain-step"><div class="chain-num">02</div><span>הפעלת מנגנון תיקון אוטומטי מקומי</span></div>
+            <div class="chain-step"><div class="chain-num">03</div><span>חזרה למצב תפעולי תקין תוך שניות</span></div>
+            <div class="chain-step"><div class="chain-num">04</div><span>רישום פורנזי קונסולרטיבי לצורכי בקרה</span></div>
+          </div>
+        </div>
+        <div class="scenario-note">מדד זמן תיקון ממוצע: פחות משישים שניות ללא מעורבות משתמש</div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="loop" class="loop-section reveal">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Continuous Optimization</div>
+        <h2>סגירת מעגל הטיפול ללא מגע יד אדם</h2>
+        <p>ארכיטקטורת הפלטפורמה מבוססת על לולאת משוב סגורה המבצעת אופטימיזציה מתמדת לכלל נכסי המחשוב בארגון.</p>
+      </div>
+
+      <div class="loop-label">הנדסת תהליך האוטומציה</div>
+
+      <div class="loop-stage">
+        <div class="flow-node">
+          <div class="fn-head">
+            <div class="fn-dots"><span></span><span></span><span></span></div>
+            <div class="fn-step">STAGE 01</div>
+          </div>
+          <div class="fn-viz">
+            <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="10" width="180" height="40" rx="2" stroke="#0a0a0a" stroke-width="1.5"/>
+              <line x1="40" y1="10" x2="40" y2="50" stroke="#0a0a0a"/>
+              <line x1="120" y1="10" x2="120" y2="50" stroke="#0a0a0a"/>
+            </svg>
+          </div>
+          <div class="fn-body">
+            <h4>מיפוי וגילוי</h4>
+            <p>סריקה מתמדת של הרשת הארגונית ואיתור מיידי של כל רכיב חומרה, תוכנה, שרת או עמדת קצה, כולל נכסים שאינם רשומים במערכות הניהול המרכזיות.</p>
+          </div>
+        </div>
+
+        <div class="flow-arrow">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20 H30 M24 14 L30 20 L24 26" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="flow-node dark">
+          <div class="fn-head">
+            <div class="fn-dots"><span></span><span></span><span></span></div>
+            <div class="fn-step">STAGE 02</div>
+          </div>
+          <div class="fn-viz">
+            <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="30" r="18" stroke="#f4d03f" stroke-width="2"/>
+              <path d="M90 30 L110 30 M100 20 L100 40" stroke="#ffffff" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="fn-body">
+            <h4>ניתוח וניבוי איומים</h4>
+            <p>הצלבת נתוני הטלמטריה מהתחנות עם מאגרי פגיעויות גלובליים. המערכת מתעדפת סיכונים ומזהה מראש כשלי חומרה, חריגות תוכנה ופערי אבטחה קריטיים.</p>
+          </div>
+        </div>
+
+        <div class="flow-arrow">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20 H30 M24 14 L30 20 L24 26" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="flow-node">
+          <div class="fn-head">
+            <div class="fn-dots"><span></span><span></span><span></span></div>
+            <div class="fn-step">STAGE 03</div>
+          </div>
+          <div class="fn-viz">
+            <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 40 L60 15 L110 45 L170 15" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="170" cy="15" r="4" fill="#f4d03f" stroke="#0a0a0a" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="fn-body">
+            <h4>תיקון ואכיפה אקטיבית</h4>
+            <p>הזרקת עדכוני אבטחה (Patching) ממוקדים, סגירת פורטים פרוצים והרצת תסריטי תיקון ברמת נקודת הקצה, ללא השפעה על חוויית המשתמש או רוחב הפס.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="loop-closer">
+        <svg viewBox="0 0 1100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M930 10 C 930 80, 170 80, 170 10" stroke="#0a0a0a" stroke-width="1.5" stroke-dasharray="6 6"/>
+        </svg>
+      </div>
+
+      <div class="loop-continue">
+        <div class="lc-marker">↺</div>
+        <div>
+          <span class="lc-tag">Continuous Operational Loop</span>
+          <p>הלולאה פועלת באופן מחזורי קבוע ומבטיחה תאימות מלאה (Compliance) למדיניות אבטחת המידע של הארגון.</p>
+        </div>
+      </div>
+
+      <div class="remote-note">
+        <div class="rn-tag">Edge Architecture</div>
+        <p><strong>התאמה לעבודה מבוזרת:</strong> הארכיטקטורה מבוססת על סוכנים עצמאיים הפועלים ישירות על התחנה. פקודות התיקון והאוטומציה מתבצעות גם כאשר המכשיר אינו מחובר לרשת הארגונית או ל-VPN, דבר המבטיח הגנה רציפה על עובדים מרחוק.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <div class="container">
+      <div class="manifesto-grid">
+        <div class="manifesto-inner">
+          <div class="eyebrow">The Core Doctrine</div>
+          <h2>תשתית מחשוב שלא דורשת כיבוי והדלקה</h2>
+          <p>היעד המרכזי של הפלטפורמה הוא ביטול מוחלט של הטיפול הידני בתקלות חוזרות ונשנות. מעבר למערך תפעול דינמי המונע את הצטברות כרטיסי התמיכה ומאפשר לצוותי ה הנדסה להתמקד בפרויקטים מקדמי צמיחה.</p>
+        </div>
+        <div class="manifesto-glyph">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 50 Q50 20 80 50 Q50 80 20 50 Z" stroke="#ffffff" stroke-width="3"/>
+            <circle cx="50" cy="50" r="10" fill="#f4d03f"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Product Modules</div>
+        <h2>מודלים פונקציונליים להשגת שליטה מלאה</h2>
+        <p>חלוקת יכולות הפלטפורמה לרכיבים מקצועיים הניתנים להטמעה מודולרית בהתאם לצרכי הארגון.</p>
+      </div>
+
+      <div class="tabs-bar" role="tablist">
+        <button class="tab active" type="button" data-pane="automation">Remediation Automation</button>
+        <button class="tab" type="button" data-pane="discovery">Asset Discovery</button>
+        <button class="tab" type="button" data-pane="patch">Risk Patching</button>
+        <button class="tab" type="button" data-pane="workspace">Digital Experience</button>
+      </div>
+
+      <div class="tab-panel automation active">
+        <div>
+          <h3>אוטומציה הנדסית בקצה <span class="en">Neurons for Healing</span></h3>
+          <p>מנוע אוטומציה מבוסס תסריטים המבצע אבחון ותיקון שגיאות באופן עצמאי לחלוטין ברמת התחנה.</p>
+          <div class="tab-points">
+            <div class="tab-point">הפעלת תסריטי תיקון אוטומטיים לשירותי מערכת שקרסו.</div>
+            <div class="tab-point">מניעת תקלות דיסק מקומיות וניקוי קבצי זבל באופן יזום.</div>
+            <div class="tab-point">אכיפת קונפיגורציות אבטחה ועדכון הגדרות רשת ללא מעורבות אנושית.</div>
+          </div>
+        </div>
+        <div class="tab-motif">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="60" stroke="#0a0a0a" stroke-width="2"/>
+            <path d="M100 40 L100 70 M100 130 L100 160 M40 100 L70 100 M130 100 L160 100" stroke="#f4d03f" stroke-width="3"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="tab-panel discovery">
+        <div>
+          <h3>גילוי נכסים בזמן אמת <span class="en">Neurons for Discovery</span></h3>
+          <p>מיפוי מקיף ודינמי של כלל רכיבי החומרה והתוכנה המחוברים לרשת תוך שניות בודדות.</p>
+          <div class="tab-points">
+            <div class="tab-point">איתור מכשירים חדשים ברשת ללא צורך בהתקנת סוכנים מוקדמת.</div>
+            <div class="tab-point">ייצור קטלוג נכסים מדויק ומסונכרן ישירות למערכות ה-CMDB.</div>
+            <div class="tab-point">זיהוי תוכנות לא מורשות ופערי רישוי המייצרים חשיפה משפטית או תקציבית.</div>
+          </div>
+        </div>
+        <div class="tab-motif">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="50" y="50" width="100" height="100" rx="4" stroke="#0a0a0a" stroke-width="2"/>
+            <circle cx="100" cy="100" r="25" stroke="#f4d03f" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="tab-panel patch">
+        <div>
+          <h3>ניהול פגיעויות חכם <span class="en">Neurons for Patch Management</span></h3>
+          <p>מנגנון הפצת עדכוני אבטחה המבוסס על רמת הסיכון המעשית של הפגיעות בארגון ולא רק על חומרת ה-CVSS היבשה.</p>
+          <div class="tab-points">
+            <div class="tab-point">תעדוף עדכונים בהתאם לפגיעויות המנוצלות בפועל בשטח על ידי תוקפים.</div>
+            <div class="tab-point">בדיקה והפצה אוטומטית של עדכוני אבטחה למערכות הפעלה ותוכנות צד שלישי.</div>
+            <div class="tab-point">צמצום חלון החשיפה הארגוני (Time to Patch) מימים למספר שעות בודדות.</div>
+          </div>
+        </div>
+        <div class="tab-motif">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 60 L100 30 L160 60 L160 130 L100 170 L40 130 Z" stroke="#0a0a0a" stroke-width="2"/>
+            <path d="M70 100 L90 120 L130 75" stroke="#f4d03f" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="tab-panel workspace">
+        <div>
+          <h3>אופטימיזציה של חוויית הקצה <span class="en">Neurons for DEX</span></h3>
+          <p>ניטור מתמד של ביצועי התחנות ומדידת רמת שביעות הרצון הטכנולוגית של משתמשי הקצה בארגון.</p>
+          <div class="tab-points">
+            <div class="tab-point">זיהוי מוקדם של זמני עליה ארוכים, קריסות אפליקציות וצווארי בקבוק בחומרה.</div>
+            <div class="tab-point">איסוף מדדים כמותיים (Telemetry) בשילוב סקרי משתמשים ממוקדים.</div>
+            <div class="tab-point">הפחתה דרסטית בכמות קריאות השירות הנוגעות לביצועי מחשב איטיים.</div>
+          </div>
+        </div>
+        <div class="tab-motif">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="140" r="20" fill="#0a0a0a"/>
+            <circle cx="140" cy="140" r="40" fill="#f4d03f"/>
+            <circle cx="100" cy="70" r="30" fill="#e5e5e2"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="depth reveal">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Strategic Value</div>
+        <h2>ההשפעה הישירה על המדדים המבצעיים של הארגון</h2>
+        <p>מעבר ליתרונות הטכנולוגיים, הטמעת הפלטפורמה מייצרת שינוי קונקרטי במדדי היעילות הכלכליים של החברה.</p>
+      </div>
+
+      <div class="depth-grid">
+        <div class="depth-card">
+          <span class="depth-tag">MTTR Reduction</span>
+          <h3>צמצום זמן התיקון</h3>
+          <p>הסטת רוב התקלות השכיחות למנגנוני תיקון עצמי מקטינה את מדד זמן התיקון הממוצע (Mean Time to Resolution) ומפנה עשרות שעות עבודה שבועיות של צוותי ה IT לטובת משימות ליבה הנדסיות.</p>
+        </div>
+
+        <div class="depth-card">
+          <span class="depth-tag">Asset Optimization</span>
+          <h3>מקסימום נצילות חומרה</h3>
+          <p>נראות מלאה ומדויקת מונעת רכש כפול של רישיונות תוכנה ומאפשרת ניצול אופטימלי של מלאי המחשוב הקיים בארגון על בסיס נתוני שימוש אמיתיים ולא הערכות יבשות.</p>
+        </div>
+
+        <div class="depth-card callout">
+          <span class="depth-tag">Risk Mitigation</span>
+          <h3>מניעת חשיפת סייבר</h3>
+          <p>סגירה מהירה של פערי אבטחה ועדכוני קצה חוסמת את וקטורי התקיפה הנפוצים ביותר. הארגון משיג רמת חסינות גבוהה מפני מתקפות כופר וניצול חולשות יום אפס.</p>
+          <div class="depth-list">
+            <span>99% הפחתה בסיכון פגיעות חומרה</span>
+            <span>אוטומציה מלאה של תהליכי ציות</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Ecosystem Integration</div>
+        <h2>אינטגרציה טבעית עם סביבת העבודה הקיימת</h2>
+        <p>פלטפורמת Ivanti Neurons מתפקדת כשכבת קישור מרכזית (Hub) ומסתנכרנת באופן מלא עם כלי הניהול, אבטחת המידע ומערכות ה-ITSM המובילות בשוק.</p>
+      </div>
+
+      <div class="hub-svg-wrap">
+        <svg viewBox="0 0 600 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="230" y="90" width="140" height="60" rx="4" fill="#f4d03f" stroke="#0a0a0a" stroke-width="2"/>
+          <text x="300" y="125" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#0a0a0a" text-anchor="middle">IVANTI HUB</text>
+          
+          <rect x="30" y="20" width="100" height="40" rx="2" fill="#ffffff" stroke="#e5e5e2"/>
+          <text x="80" y="44" font-family="sans-serif" font-size="12" fill="#5a5a5a" text-anchor="middle">ServiceNow</text>
+          
+          <rect x="470" y="20" width="100" height="40" rx="2" fill="#ffffff" stroke="#e5e5e2"/>
+          <text x="520" y="44" font-family="sans-serif" font-size="12" fill="#5a5a5a" text-anchor="middle">Microsoft AD</text>
+          
+          <rect x="30" y="180" width="100" height="40" rx="2" fill="#ffffff" stroke="#e5e5e2"/>
+          <text x="80" y="204" font-family="sans-serif" font-size="12" fill="#5a5a5a" text-anchor="middle">Azure Intune</text>
+          
+          <rect x="470" y="180" width="100" height="40" rx="2" fill="#ffffff" stroke="#e5e5e2"/>
+          <text x="520" y="204" font-family="sans-serif" font-size="12" fill="#5a5a5a" text-anchor="middle">Splunk SIEM</text>
+          
+          <path d="M130 40 L230 100 M470 40 L370 100 M130 200 L230 140 M470 200 L370 140" stroke="#0a0a0a" stroke-width="1.5" stroke-dasharray="4 4"/>
+        </svg>
+      </div>
+
+      <div class="hub-mobile">
+        <div class="hub-chip center">Ivanti Neurons Platform</div>
+        <div class="hub-chip">ServiceNow Connector</div>
+        <div class="hub-chip">Microsoft Entra ID</div>
+        <div class="hub-chip">Microsoft Intune API</div>
+        <div class="hub-chip">Splunk SIEM Integration</div>
+        <div class="hub-chip">Jira Service Management</div>
+      </div>
+
+      <p class="hub-caption">סנכרון נתונים דו כיווני המונע כפילויות מידע וממקסם את ההשקעה בכלי התוכנה הקיימים בחברה.</p>
+    </div>
+  </section>
+
+  <section class="one reveal">
+    <div class="container">
+      <div class="one-top">
+        <div class="one-digit-wrap">
+          <span class="one-digit">1</span>
+        </div>
+        <div class="one-text">
+          <h2>פלטפורמה אחודה לניהול חוויית המשתמש והאבטחה</h2>
+          <p>ריבוי מערכות ניהול נקודתיות מייצר שטחים עיוורים, תקורת תחזוקה גבוהה ופערי נראות. פלטפורמת Ivanti Neurons מרכזת את כלל הפעולות תחת ממשק ניהולי מרכזי אחד ומספקת שליטה הוליסטית על כלל נכסי המחשוב.</p>
+        </div>
+      </div>
+
+      <div class="one-cards">
+        <div class="one-card">
+          <span class="oc-tag">Unified Agent</span>
+          <h3>סוכן חכם אחד בקצה</h3>
+          <p>ביטול הצורך בהתקנת מספר רב של תוכנות ניהול על תחנת העבודה. סוכן יחיד ויעיל המבצע את כלל משימות הניטור, האוטומציה, התיקון והפצת העדכונים ללא פגיעה בביצועי המחשב.</p>
+        </div>
+        <div class="one-card">
+          <span class="oc-tag">Central Console</span>
+          <h3>קונסולת ניהול מרכזית</h3>
+          <p>ממשק ניהול אחיד המציג תמונה מלאה ועדכנית של מצב האבטחה, מלאי הרכיבים וחוויית המשתמש בארגון, המאפשר קבלת החלטות מבוססת נתונים בזמן אמת.</p>
+        </div>
+        <div class="one-card">
+          <span class="oc-tag">Cross Data Engine</span>
+          <h3>קורלציית נתונים מתקדמת</h3>
+          <p>מנוע הנתונים מבצע הצלבה אוטומטית בין ביצועי החומרה, פגיעויות האבטחה ואירועי הרשת, דבר המאפשר זיהוי מהיר של סיבות השורש לתקלות מורכבות.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">DnA IT Engineering</div>
+        <h2>הערך המעשי של ארכיטקטורת ההטמעה שלנו</h2>
+        <p>טכנולוגיה מתקדמת דורשת תכנון מדויק והתאמה ארכיטקטונית מלאה למאפייני הארגון שלכם כדי להבטיח את השגת יעדי הפרויקט.</p>
+      </div>
+
+      <div class="dna-grid">
+        <div class="dna-card">
+          <span class="dc-tag">Technical Architecture</span>
+          <h3>אפיון ותכנון מדיניות מותאמת</h3>
+          <p>צוות המהנדסים של DnA IT מבצע אפיון מעמיק של תשתית המחשוב בארגון, מגדיר את פרופילי האבטחה הנדרשים ובונה את תסריטי האוטומציה בהתאם לצרכים התפעוליים הספציפיים שלכם.</p>
+        </div>
+        <div class="dna-card callout">
+          <span class="dc-tag">Safe Deployment</span>
+          <h3>פריסה מדורגת ומבוקרת</h3>
+          <p>ניהול תהליך ההטמעה מתבצע באופן מדורג ומבוקר (Ring Deployment) כדי למנוע השפעה על רציפות העבודה בארגון, תוך ביצוע בדיקות התאמה קפדניות לפני מעבר מלא לייצור.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Methodological Lifecycle</div>
+        <h2>שלבי מתודולוגיית היישום וההטמעה</h2>
+        <p>תהליך עבודה מובנה ומקצועי המבטיח מעבר מהיר מתשתית מסורתית לסביבת מחשוב מנוהלת ואוטומטית.</p>
+      </div>
+
+      <div class="dna-process-stepper">
+        <div class="dna-step">
+          <div class="dna-step-circle"><span class="dna-step-num">01</span></div>
+          <div class="dna-step-content">
+            <h4>אפיון טכנולוגי</h4>
+            <p>מיפוי הכלים הקיימים, הגדרת יעדי האוטומציה וקביעת מדדי ההצלחה לפרויקט.</p>
+          </div>
+        </div>
+        <div class="dna-step">
+          <div class="dna-step-circle"><span class="dna-step-num">02</span></div>
+          <div class="dna-step-content">
+            <h4>בניית ארכיטקטורה</h4>
+            <p>הקמת תשתית הניהול, הגדרת פרופילי האבטחה ותכנון לולאות התיקון האוטומטיות.</p>
+          </div>
+        </div>
+        <div class="dna-step">
+          <div class="dna-step-circle"><span class="dna-step-num">03</span></div>
+          <div class="dna-step-content">
+            <h4>סבב פיילוט מבוקר</h4>
+            <p>התקנת הסוכן על קבוצת בדיקה מוגדרת לצורך תיקוף חוקי האוטומציה והקונפיגורציה.</p>
+          </div>
+        </div>
+        <div class="dna-step">
+          <div class="dna-step-circle"><span class="dna-step-num">04</span></div>
+          <div class="dna-step-content">
+            <h4>פריסה ארגונית מלאה</h4>
+            <p>הפצה רוחבית מנוהלת לכלל עמדות הקצה, שרתים ותשתיות המחשוב בחברה.</p>
+          </div>
+        </div>
+        <div class="dna-step">
+          <div class="dna-step-circle"><span class="dna-step-num">05</span></div>
+          <div class="dna-step-content">
+            <h4>אופטימיזציה שוטפת</h4>
+            <p>ניתוח מדדי הביצוע, עדכון תסריטי התיקון והקשחת מדיניות האבטחה באופן מתמיד.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* JS for Scenario Toggle and Scroll Reveal - Structurally Intact */
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tabs
+      const tabs = document.querySelectorAll('.tab');
+      const panels = document.querySelectorAll('.tab-panel');
+      tabs.forEach(t => {
+        t.addEventListener('click', () => {
+          tabs.forEach(button => button.classList.remove('active'));
+          panels.forEach(p => p.classList.remove('active'));
+          t.classList.add('active');
+          const targetPane = t.getAttribute('data-pane');
+          document.querySelector(`.tab-panel.${targetPane}`).classList.add('active');
+        });
+      });
+
+      // Story Toggle
+      const storyBtns = document.querySelectorAll('.story-toggle button');
+      const scenarios = document.querySelectorAll('.scenario');
+      storyBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          storyBtns.forEach(btn => btn.classList.remove('active'));
+          scenarios.forEach(sc => sc.classList.remove('active'));
+          b.classList.add('active');
+          const targetScenario = b.getAttribute('data-scenario');
+          document.querySelector(`.scenario.${targetScenario}`).classList.add('active');
+        });
+      });
+
+      // Simple Intersection Observer for scroll reveal effect
+      const revealElements = document.querySelectorAll('.reveal, .section-head');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.classList.add('in');
+          }
+        });
+      }, { threshold: 0.1 });
+      revealElements.forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>
