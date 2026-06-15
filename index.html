@@ -167,9 +167,9 @@
   .sh-viz .corner { position:absolute; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.15em; color:rgba(255,255,255,0.4); text-transform:uppercase; }
 
   /* BENEFITS */
-  .benefits-light { background:var(--bg-elev); }
+  .benefits-light { background:var(--bg); }
   .benefits-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
-  .benefit-card { background:var(--bg); border:1px solid var(--line); padding:clamp(32px,3.6vw,40px) clamp(24px,2.8vw,32px); position:relative; transition:all 0.3s ease; overflow:hidden; }
+  .benefit-card { background:var(--bg-elev); border:1px solid var(--line); padding:clamp(32px,3.6vw,40px) clamp(24px,2.8vw,32px); position:relative; transition:all 0.3s ease; overflow:hidden; }
   .benefit-card::before { content:""; position:absolute; top:0; right:0; width:32px; height:4px; background:var(--accent); transition:width 0.35s var(--ease); }
   .benefit-card:hover { border-color:var(--text); transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,0.08); background:var(--accent-tint); }
   .benefit-card:hover::before { width:100%; }
