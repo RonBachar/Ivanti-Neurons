@@ -63,6 +63,36 @@
   .hero-visual { position:relative; aspect-ratio:1/1.05; border:1px solid var(--line-strong); border-radius:8px; background:var(--bg-elev); overflow:hidden; display:flex; align-items:center; justify-content:center; max-width:480px; width:100%; margin-inline:auto; }
   .hero-visual .mock-label { position:absolute; top:16px; right:16px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.15em; color:var(--text-mute); text-transform:uppercase; }
   .hero-visual .mock-dot { position:absolute; top:18px; left:16px; width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:14px 0 0 #e5e5e2,28px 0 0 #e5e5e2; }
+
+  /* ===== HERO ONLY — Ivanti Neurons brand colors (deep purple + orange). Scoped to .hero; rest of page stays black/yellow/grey. ===== */
+  .hero {
+    --h-bg:#2a0a47; --h-core:#3d1466; --h-orange:#f15a22; --h-orange-soft:#ff7a45;
+    --h-text:#ffffff; --h-text-dim:rgba(255,255,255,0.72); --h-line:rgba(255,255,255,0.16);
+    --h-glow:rgba(241,90,34,0.35);
+    background:var(--h-bg);
+    background-image:radial-gradient(ellipse 90% 80% at 50% 30%, var(--h-core), var(--h-bg) 75%);
+  }
+  .hero .hero-grid { background-image:linear-gradient(rgba(255,255,255,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.05) 1px,transparent 1px); opacity:1; }
+  .hero::before { background:radial-gradient(ellipse,var(--h-glow),transparent 70%); }
+  .hero .eyebrow { color:var(--h-text); }
+  .hero .eyebrow::before { background:var(--h-orange); }
+  .hero h1 { color:var(--h-text); }
+  .hero h1 .accent { background:var(--h-orange); color:var(--h-text); box-shadow:4px 4px 0 rgba(0,0,0,0.35); }
+  .hero .hero-sub { color:var(--h-text-dim); }
+  .hero .hero-pill { background:rgba(255,255,255,0.06); border-color:var(--h-line); color:var(--h-text-dim); }
+  .hero .hero-pill:hover { background:var(--h-orange); border-color:var(--h-orange); color:var(--h-text); }
+  .hero .btn-primary { background:var(--h-orange); color:var(--h-text); }
+  .hero .btn-primary:hover { background:var(--h-text); color:var(--h-core); transform:translateY(-2px); box-shadow:0 8px 20px var(--h-glow); }
+  /* hero visual reskinned to brand */
+  .hero .hero-visual { background:rgba(255,255,255,0.04); border-color:var(--h-line); }
+  .hero .hero-visual .mock-label { color:rgba(255,255,255,0.5); }
+  .hero .hero-visual .mock-dot { background:var(--h-orange); box-shadow:14px 0 0 rgba(255,255,255,0.25),28px 0 0 rgba(255,255,255,0.25); }
+  .hero .neuron-svg circle[stroke="#e5e5e2"] { stroke:rgba(255,255,255,0.18); }
+  .hero .neuron-svg g[stroke="#e5e5e2"] line { stroke:rgba(255,255,255,0.18); }
+  .hero .neuron-svg g[fill="#0a0a0a"] circle { fill:var(--h-orange); }
+  .hero .neuron-svg > circle[fill="#0a0a0a"] { fill:#1a052e; }
+  .hero .neuron-svg circle[stroke="#f4d03f"] { stroke:var(--h-orange); }
+  .hero .neuron-svg text { fill:var(--h-orange) !important; }
   .neuron-svg { width:82%; height:auto; }
   .neuron-svg .pulse { transform-origin:center; animation:pulse 2.6s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:0.35;} 50%{opacity:1;} }
@@ -225,7 +255,7 @@
     .dna-step-circle { margin:0; }
     .btn { width:100%; justify-content:center; }
     .final-ctas .btn { width:100%; }
-    .hero h1 .accent { box-shadow:3px 3px 0 var(--text); }
+    .hero h1 .accent { box-shadow:3px 3px 0 rgba(0,0,0,0.35); }
   }
 </style>
 </head>
